@@ -1,0 +1,10 @@
+
+
+
+	/*错误提示*/
+	#hint{
+		width: 270px; line-height: 60px; font-size: 25px; border-radius: 5px; margin: 0 auto; text-align: center; background-color: #323232; 
+		color: #FFFFFF; position: fixed; position: absolute; margin: -250px 0px 0px 180px;  z-index: 9999;
+		display: none; z-index: 9999;
+	}
+	

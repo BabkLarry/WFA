@@ -1,0 +1,326 @@
+﻿<!--wx:So_Magical_nn-->
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>提交申请</title>
+		<meta name="viewport" content="target-densitydpi=320,width=640,user-scalable=no">
+        <link rel="stylesheet" href="./css/modularization.css" />
+		<script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="./js/modularization.js"></script>
+		<script type="text/javascript" src="./js/exif.js"></script>
+		<script type="text/javascript" src="./js/base64image.js"></script>
+		<!--禁用分享-->
+		<script type="text/javascript" src="http://res2.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+		<script>
+		    function onBridgeReady() {
+		        WeixinJSBridge.call('hideOptionMenu');
+		    }
+		    if (typeof WeixinJSBridge == "undefined") {
+		        if (document.addEventListener) {
+		            document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+		        } else if (document.attachEvent) {
+		            document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+		            document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+		        }
+		    } else {
+		        onBridgeReady();
+		    }
+		</script>
+		<!--library-->
+		<script type="text/javascript">
+			//wx:So_Magical_nn
+			pushHistory();
+
+			function pushHistory() {
+				var state = {
+					title: "title",
+					url: "#"
+				};
+				window.history.pushState(state, "title", "#");
+			}
+			window.addEventListener("popstate", function(e) {
+				window.history.go(-1);
+			}, false);
+			var Cc_d21 = function(Mar) {
+				base64Image({
+					width: 660,
+					ratio: 0.90,
+					file: Mar,
+					callback: function(imageUrl) {
+						var str = '<img src="' + imageUrl + '" onclick="marketingRemove(this)" />';
+						$(".Cc_d211").append(str);
+						var imgLength = $(".Cc_d211").children("img").length;
+						if(imgLength == 1) {
+							$(".Cc_d212").hide();
+						}
+					},
+				});
+			}
+			
+			var Cc_d22 = function(Mar) {
+				base64Image({
+					width: 660,
+					ratio: 0.90,
+					file: Mar,
+					callback: function(imageUrl) {
+						var str = '<img src="' + imageUrl + '" onclick="marketingRemove2(this)" />';
+						$(".Cc_d221").append(str);
+						var imgLength = $(".Cc_d221").children("img").length;
+						if(imgLength == 1) {
+							$(".Cc_d222").hide();
+						}
+					},
+				});
+			}
+			function slideshow(obj) {
+				var lb = '';
+				chartnumbers = $(obj).length;
+				if( obj.length  == 1){
+					return $(obj[0]).attr("src"); 
+				}
+				
+				return "";
+			}
+			function marketingRemove(img) {
+				var conf = confirm("是否删除图片");
+				if(conf) {
+					$(img).remove();
+					var imgLength = $(".Cc_d21").children("img").length;
+					if(imgLength == 0) {
+						$(".Cc_d212").css({
+							"position": "initial",
+							"top": "initial"
+						});
+					}
+					if(imgLength < 3) {
+						$(".Cc_d212").show();
+					}
+				}
+			}
+			
+			function marketingRemove2(img) {
+				var conf = confirm("是否删除图片");
+				if(conf) {
+					$(img).remove();
+					var imgLength = $(".Cc_d22").children("img").length;
+					if(imgLength == 0) {
+						$(".Cc_d222").css({
+							"position": "initial",
+							"top": "initial"
+						});
+					}
+					if(imgLength < 3) {
+						$(".Cc_d222").show();
+					}
+				}
+			}
+
+			function ok(obj) {
+				obj.value = obj.value.replace(/[^\d.]/g, ""); //清除"数字"和"."以外的字符
+				obj.value = obj.value.replace(/^\./g, ""); //验证第一个字符是数字
+				obj.value = obj.value.replace(/\.{2,}/g, "."); //只保留第一个, 清除多余的
+				obj.value = obj.value.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+				obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'); //只能输入两个小数
+			}
+			
+			// 车牌号判断
+			function isVehicleNumber(vehicleNumber) {
+			  var xreg=/^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}(([0-9]{5}[DF]$)|([DF][A-HJ-NP-Z0-9][0-9]{4}$))/;
+			  var creg=/^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-HJ-NP-Z0-9]{4}[A-HJ-NP-Z0-9挂学警港澳]{1}$/;
+			  if(vehicleNumber.length == 7){
+			    return creg.test(vehicleNumber);
+			  } else if(vehicleNumber.length == 8){
+			    return xreg.test(vehicleNumber);
+			  } else{
+			    return false;
+			  }
+			 
+			}
+			
+            $(function() {
+                $(".TJJ").click(function() {
+                    var car_no = $("#car_no").val();
+                    var car_registration = $("#car_registration").val();
+                    var car_emission_stan = $("#car_emission_stan").val();
+					var car_engine_number = $("#car_engine_number").val();
+					var car_code = $("#car_code").val();
+                    var driverslicense_img = slideshow($(".Cc_d211 img"));
+					var accompanying_img = slideshow($(".Cc_d221 img"));
+					
+					
+					if(driverslicense_img == "" || car_code == "" || car_no == "" || car_registration == "" || car_emission_stan == "" || car_engine_number == ""){
+						alert("请填写必填信息!");
+						return;
+					}
+					
+					if(!isVehicleNumber(car_no)){
+						alert("请输入正确的车牌号!");
+						return;
+					}
+					
+					
+                    var data = '{"car_no":"' + car_no + '","accompanying_img":"' + accompanying_img + '","driverslicense_img":"' + driverslicense_img + '","code":"' + car_code + '","registration":"' + car_registration + '","emission_standard":"' + car_emission_stan + '","engine_number":"' + car_engine_number + '"}';
+                    console.log(data);
+                    $.ajax({
+                        type: "post",
+                        url: "/api/Vehicle",
+                        async: true,
+                        contentType: "application/json", 
+                        data: data,
+                        success: function(res) {
+                            var res = eval('(' + res + ')');
+                            if(res.mode == "success") {
+                                alert("提交成功！");
+                            } else {
+                                if(res.errmsg != "空") {
+                                    alert(res.errmsg);
+                                } else {
+                                    alert("保存失败，请稍后重试！");
+                                }
+                                but();
+                            }
+                        },
+                        error: function(res) {
+                            alert("服务器繁忙请稍后重试");
+                            but();
+                        }
+                    });
+                })
+            })
+			function but() {
+				$(".TJJ").removeAttr("disabled");
+				$(".TJJ").css("background", "#f83149");
+			}
+
+			
+
+		</script>
+		<link rel="stylesheet" href="./css/gksqshscpz_wx.css" />
+		<style>
+
+			.Cc_d212 {
+				width: 150px;
+				height: 150px;
+				background-image: url(./images/tianjiatupian4.png);
+				background-size: 100% 100%;
+				position: relative;
+				display: inline-block;
+			}
+			.Cc_d222 {
+				width: 150px;
+				height: 150px;
+				background-image: url(./images/tianjiatupian4.png);
+				background-size: 100% 100%;
+				position: relative;
+				display: inline-block;
+			}
+			.E_a{ float:left;}
+			.E_b{ float:left; width:calc(100% - 210px);}
+			.E_s{ float:left; width:calc(100% - 210px); padding:10px 0; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;}
+			.E_c{ float:left; width:calc(50% - 105px); margin: 0; line-height: 32px; font-size: 20px;}
+			.E_c>.jine_001{ font-size:28px; padding-left: 4px; margin-bottom: 10px;}
+			.E_d{ float:left; width:calc(50% - 105px); margin: 0 0 10px 0; line-height: 32px; text-align:right;}
+
+			.one_001{ overflow: hidden;}
+			.one_001>.left_001{ float:left; width:140px; margin:0; line-height: 50px;}
+			.one_001>.right_001{ float:left; width:calc(100% - 140px); margin:0;}
+			.one_001>.right_001>div{ line-height: 50px;}
+			.one_001>.right_001 select{ height: 50px; line-height: 50px; margin: 0; padding:0 20px; width:100%; border-color: #ddd;}
+			.one_001>.right_001 textarea{ margin: 0; padding:10px 20px; width:calc(100% - 42px);}
+			.jiage_input{ position:relative; margin-bottom: 10px;}
+			.jiage_input>.fuhao_001{ position:absolute; left:10px; top:0; line-height: 52px;}
+			.jiage_input>input{  border:1px solid #ddd; width:calc(100% - 42px); padding:0 10px 0 30px; height:50px; color:#333; font-weight: 400;;}
+			.TJJ{ border-radius: 10px; left:20px; bottom:15px; width:calc(100% - 40px);}
+			.PZ{ margin-bottom: 110px;}
+		</style>
+	</head>
+
+	<body>
+		
+		<div class="Y one_001">
+			<div>车辆信息填写</div>
+		</div>
+		
+		<div class="TuiQ">
+			<div class="TJ one_001" style=" padding-top: 10px;">
+				<div class="left_001">车牌号：</div>
+				<div class="right_001">
+					<div class="jiage_input">
+						<input type="text"  id="car_no"  />
+					</div>
+				</div>
+				
+				<div class="left_001">注册日期：</div>
+				<div class="right_001">
+					<div class="jiage_input">
+						<input type="date" id="car_registration"  />
+					</div>
+				</div>
+				<div class="TY left_001">排放阶段：</div>
+				<div class="yuanyin right_001">
+					<select id="car_emission_stan">
+						<option value="0">国0</option>
+						<option value="1">国1</option>
+						<option value="2">国2</option>
+						<option value="3">国3</option>
+						<option value="4">国4</option>
+						<option value="5">国5</option>
+						<option value="6">国6</option>
+						<option value="D">电动</option>
+					</select>
+				</div>
+			</div>
+			
+			<div class="TJ one_001" style=" padding-top: 10px;">
+				<div class="left_001">发动机号码</div>
+				<div class="right_001">
+					<div class="jiage_input">
+						<input type="text"  id="car_engine_number"  />
+					</div>
+				</div>
+			</div>
+			
+			<div class="TJ one_001" style=" padding-top: 10px;">
+				<div class="left_001">车辆识别码</div>
+				<div class="right_001">
+					<div class="jiage_input">
+						<input type="text"  id="car_code"  />
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="PZ">
+			<div class="ping">驾驶证图片：</div>
+			<div style="color: #7b7b7b;padding-left: 30px;font-size: 24px;font-size: 22px;">请保证图片内容完整清晰</div>
+			<div class="Cc_d2">
+				<div class="Cc_d21">
+					<div class="Cc_d211" style="height: 100px; float: left;">
+
+					</div>
+					<div class="Cc_d212">
+						<input type="file" onchange="Cc_d21(this)" />
+					</div>
+				</div>
+				<div style="clear: both;"></div>
+			</div>
+			
+			<div class="ping">随车清单：</div>
+			<div style="color: #7b7b7b;padding-left: 30px;font-size: 24px;font-size: 22px;">请保证图片内容完整清晰</div>
+			<div class="Cc_d2">
+				<div class="Cc_d22">
+					<div class="Cc_d221" style="height: 100px; float: left;">
+					</div>
+					<div class="Cc_d222">
+						<input type="file" onchange="Cc_d22(this)" />
+					</div>
+				</div>
+				<div style="clear: both;"></div>
+			</div>
+		</div>
+		<button class="TJJ">提交</button>
+	</body>
+
+</html>

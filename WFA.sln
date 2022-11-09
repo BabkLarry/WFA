@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.2092
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WFA", "WFA\WFA.csproj", "{425D01D1-8692-462B-B5D5-60726E63814E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "wfa_Web", "wfa_Web\wfa_Web.csproj", "{B38CEE5F-6C7E-4AEE-BF90-19938F449DCD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{425D01D1-8692-462B-B5D5-60726E63814E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{425D01D1-8692-462B-B5D5-60726E63814E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{425D01D1-8692-462B-B5D5-60726E63814E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B38CEE5F-6C7E-4AEE-BF90-19938F449DCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B38CEE5F-6C7E-4AEE-BF90-19938F449DCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B38CEE5F-6C7E-4AEE-BF90-19938F449DCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B38CEE5F-6C7E-4AEE-BF90-19938F449DCD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
